@@ -6,17 +6,7 @@
     <span class="badge">{{recipe.id}}</span>{{recipe.name}}
   </li>
 </ul>
+<app-recipe-detail [recipe]=selectedRecipe></app-recipe-detail>
 
-<div *ngIf="selectedRecipe">
-
-  <h2>{{ selectedRecipe.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{selectedRecipe.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="selectedRecipe.name" placeholder="name">
-    </label>
-  </div>
-
-</div>
 
 
