@@ -1,8 +1,22 @@
-<div>
- <label>
-   <input [(ngModel)] = "recipe.name" placeholder="name">
- </label>
+<h2>My Recipes</h2>
+<ul>
+  <li *ngFor="let recipe of recipes"
+  [class.selected]="recipe === selectedRecipe"
+   (click)="onSelect(recipe)">
+    <span class="badge">{{recipe.id}}</span>{{recipe.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedRecipe">
+
+  <h2>{{ selectedRecipe.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{selectedRecipe.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedRecipe.name" placeholder="name">
+    </label>
+  </div>
+
 </div>
-<h2>{{recipe.name|uppercase}} Details</h2>
-<div><span>id:{{recipe.id}}</span></div>
-<div><span>name:{{recipe.name}}</span></div>
+
+
