@@ -10,10 +10,6 @@ export class RecipesComponent implements OnInit {
 
   recipes: Recipe[];
 
-
-  selectedRecipe : Recipe;
-
-
   constructor(private recipeSerice:RecipeService) { }
 
   getRecipes():void{
@@ -24,7 +20,5 @@ export class RecipesComponent implements OnInit {
     this.getRecipes();
   }
 
-  onSelect(recipe : Recipe):void{
-    this.selectedRecipe = recipe;
-  }
+
 }
