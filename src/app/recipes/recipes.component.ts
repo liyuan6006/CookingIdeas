@@ -19,6 +19,12 @@ export class RecipesComponent implements OnInit {
   ngOnInit() {
     this.getRecipes();
   }
-
+addRecipe(name: string):void{
+if(!name){
+  return;
+}
+this.recipeSerice.addRecipe({name} as Recipe)
+.subscribe(recipe=>this.recipes.push(recipe));
+}
 
 }

@@ -1,4 +1,12 @@
 <h2>My Recipes</h2>
+<div>
+  <label>Recipe name:
+    <input #recipeName />
+  </label>
+  <button (click)="addRecipe(recipeName.value);">
+    Add
+  </button>
+</div>
 <ul>
   <li *ngFor="let recipe of recipes">
     <a routerLink="/detail/{{recipe.id}}">
