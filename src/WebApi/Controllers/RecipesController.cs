@@ -20,15 +20,30 @@ namespace WebApi.Controllers
             _context = context;
         }
 
-        // GET: api/Recipes
-        [HttpGet]
-        public IEnumerable<Recipe> GetRecipe()
-        {
-            return _context.Recipe;
-        }
+    //// GET: api/Recipes
+    //[HttpGet]
+    //public IEnumerable<Recipe> GetRecipe()
+    //{
+    //    return _context.Recipe;
+    //}
 
-        // GET: api/Recipes/5
-        [HttpGet("{id}")]
+    // GET: api/Recipes
+    [HttpGet]
+    public IActionResult GetRecipe([FromQuery] string name)
+    {
+      var recipes = _context.Recipe.Where(s => s.Name.Contains(name) || name == null);
+
+      if (recipes == null)
+      {
+        return NotFound();
+      }
+
+      return Ok(recipes);
+
+    }
+
+    // GET: api/Recipes/5
+    [HttpGet("{id}")]
         public async Task<IActionResult> GetRecipe([FromRoute] int id)
         {
             if (!ModelState.IsValid)

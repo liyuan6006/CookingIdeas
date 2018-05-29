@@ -27,4 +27,8 @@ this.recipeSerice.addRecipe({name} as Recipe)
 .subscribe(recipe=>this.recipes.push(recipe));
 }
 
+delete(recipe:Recipe) :void{
+  this.recipes = this.recipes.filter(s=>s!=recipe);
+this.recipeSerice.deleteRecipe(recipe).subscribe();
+}
 }

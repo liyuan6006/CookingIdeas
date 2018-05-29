@@ -12,6 +12,7 @@
     <a routerLink="/detail/{{recipe.id}}">
     <span class="badge">{{recipe.id}}</span>{{recipe.name}}
   </a>
+  <button class="delete" (click)="delete(recipe)">x</button>
   </li>
 </ul>
 

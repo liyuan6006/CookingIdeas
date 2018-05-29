@@ -1,0 +1,12 @@
+<div id="search-component">
+<h4>Recipe Search</h4>
+<input #searchBox id="search-box" (keyup)="search(searchBox.value)"/>
+
+<ul class="search-result">
+  <li *ngFor ="let recipe of recipes$|async">
+<a routerLink = "/detail/{{recipe.id}}">
+{{recipe.name}}</a>
+
+  </li>
+</ul>
+</div>

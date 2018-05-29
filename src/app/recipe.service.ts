@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Recipe} from './recipe';
-import {RECIPES} from './mock-recipes';
 import {of,Observable} from 'rxjs';
 import {MessageService} from './message.service';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
@@ -19,23 +18,50 @@ private recipeUrl = 'http://localhost:56060/api/recipes';
   getRecipes(): Observable<Recipe[]>{
     return this.http.get<Recipe[]>(this.recipeUrl)
     .pipe(
-      tap(recipes=>this.log('fetched recipes')),
+      tap(recipes=>this.log(`fetched recipes`)),
       catchError(this.handleError('getRecipes', []))
     );
   }
 
   addRecipe(recipe:Recipe):Observable<Recipe>{
     return this.http.post<Recipe>(this.recipeUrl,recipe).pipe(
-      tap((recipe:Recipe)=>this.log('added recipe with id =${recipe.id}')),
+      tap((recipe:Recipe)=>this.log(`added recipe with id =${recipe.id}`)),
     catchError(this.handleError<Recipe>('addRecipe'))
   );
+}
+
+updateRecipe(recipe:Recipe):Observable<any>{
+  return this.http.put<any>(this.recipeUrl,recipe).pipe(
+    tap(_=>this.log(`updated recipe with =${recipe}`),
+    catchError(this.handleError<any>('updateRecipe'))
+  )
+  )
 }
 
   getRecipeById(id:number): Observable<Recipe>{
     const url = `${this.recipeUrl}/${id}`;
     return this.http.get<Recipe>(url).pipe(
-      tap((recipe:Recipe)=>this.log('fetched recipe with id =${recipe.id}')),
+      tap((recipe:Recipe)=>this.log(`fetched recipe with id =${recipe.id}`)),
     catchError(this.handleError<Recipe>('addRecipe')));
+  }
+
+  deleteRecipe(recipe:Recipe):Observable<Recipe>{
+ const id = recipe.id;
+ const url = `${this.recipeUrl}/${id}`;
+ return this.http.delete<Recipe>(url).pipe(
+   tap(_=>this.log(`deleted recipe with id ${id}`)),
+   catchError(this.handleError('deleteRecipe')));
+  }
+
+  searchRecipe(term:string):Observable<Recipe[]>{
+if(!term.trim()){
+  return of([]);
+}
+return this.http.get<Recipe[]>(`${this.recipeUrl}/?name=${term}`).pipe(
+  tap(_=>this.log(`found recipes matching "${term}"`)),
+  catchError(this.handleError<Recipe[]>('searchRecipes',[])
+)
+)
   }
 
   private log(message:string){

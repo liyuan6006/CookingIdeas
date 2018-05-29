@@ -9,6 +9,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
+import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {HttpClientModule} from '@angular/common/http';
     RecipesComponent,
     RecipeDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    RecipeSearchComponent
   ],
   imports: [
     BrowserModule,
